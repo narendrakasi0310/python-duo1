@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: python-duo
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: starter
+    disk:
+      name: python-duo-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /var/data/python_duo.db
+      - key: MEMBER1_USERNAME
+        value: narendra
+      - key: MEMBER1_PASSWORD
+        sync: false
+      - key: MEMBER1_NAME
+        value: Narendra
+      - key: MEMBER2_USERNAME
+        value: friend
+      - key: MEMBER2_PASSWORD
+        sync: false
+      - key: MEMBER2_NAME
+        value: Friend
